@@ -1,0 +1,53 @@
+# AI Safety Monitor - configuration
+# Values are the defaults; override any of them with environment variables
+# (CAMERA_SOURCE, DETECT_CONFIDENCE_THRESHOLD, ...) or via .env (see .env.example).
+
+camera_id: camera-1
+log_level: INFO
+
+camera:
+  source: "0"            # webcam index, video file path, rtsp:// URL, or "synthetic"
+  width: 640
+  height: 480
+  fps: 20.0
+  rtsp_buffer_size: 1
+
+detection:
+  detector_mode: auto              # auto | yolo | stub
+  model_path: models/weapon_model.pt
+  model_conf: 0.25                 # raw YOLO NMS threshold (pre-filter)
+  confidence_threshold: 0.80       # positive detection threshold for confirmation logic
+  weapon_classes: [grenade, knife, pistol, rifle]  # classes in models/weapon_model.pt
+  iou: 0.45
+  max_det: 300
+
+confirmation:
+  window: 5
+  min_positive: 3
+  min_mean_confidence: 0.0         # optional extra rule (unused by default)
+
+events:
+  cooldown_seconds: 10.0
+  evidence_dir: events
+  save_evidence: true
+  jpeg_quality: 92
+
+violence:
+  enabled: false                   # enable when a real action model is plugged in
+  window: 16
+  min_positive: 10
+  threshold: 0.6
+  trigger_high_risk: true          # weapon AND violence -> high_risk event
+
+alerts:
+  enabled: true
+  log: true
+  dashboard: true
+  webhook_url: ""                  # future backends; not yet implemented
+  email_to: ""
+
+api:
+  host: 127.0.0.1
+  port: 8000
+  require_auth_token: false
+  auth_token: ""

@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Env / secrets
+.env
+
+# Data and evidence
+data/
+events/
+
+# Models (user-supplied / trained)
+models/*.pt
+models/*.onnx
+# Exception: bundle the default weapon model for deployment
+!models/weapon_model.pt
+
+# Build/test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Editor/OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

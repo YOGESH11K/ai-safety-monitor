@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Safety Monitor</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot pulse" id="connDot"></span>
+      <h1>AI Safety Monitor</h1>
+      <span class="mode" id="modelBadge">stub</span>
+    </div>
+    <div class="status-row">
+      <div id="stateBadge" class="state NORMAL">NORMAL</div>
+      <span class="risk" id="riskBadge">risk: none</span>
+      <span class="camera" id="cameraId">camera-1</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="feed-panel">
+      <div class="feed-wrap">
+        <img id="liveFeed" alt="Live camera feed">
+      </div>
+      <div class="feed-meta">
+        <span id="feedFrame">frame 0</span>
+        <span id="feedSource">source: -</span>
+      </div>
+    </section>
+
+    <section class="side-panel">
+      <div class="card">
+        <h2>Current Detections</h2>
+        <ul id="detectionList" class="det-list">
+          <li class="empty">No detections.</li>
+        </ul>
+        <div class="violence-row">
+          <span class="lbl">Movement analysis</span>
+          <span id="violenceBadge" class="badge quiet">not enabled</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Recent Events</h2>
+        <table class="events-table">
+          <thead>
+            <tr><th>Time</th><th>Type</th><th>Class</th><th>Conf</th><th></th></tr>
+          </thead>
+          <tbody id="eventsBody">
+            <tr><td colspan="5" class="empty">No events yet.</td></tr>
+          </tbody>
+        </table>
+        <button id="refreshEvents" class="ghost">Refresh</button>
+      </div>
+    </section>
+  </main>
+
+  <section class="card evidence-card">
+    <h2>Evidence</h2>
+    <div class="evidence-toolbar">
+      <label>Load evidence for event: <select id="eventSelect"></select></label>
+      <button id="markReviewed" class="ghost">Mark reviewed</button>
+      <button id="markIgnored" class="ghost">Mark ignored</button>
+    </div>
+    <div class="evidence-wrap">
+      <img id="evidenceImg" alt="Captured evidence frame" hidden>
+      <p id="evidenceEmpty" class="empty">Select an event to view its captured evidence frame.</p>
+    </div>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
